@@ -67,27 +67,25 @@
     }
     var c = 0;
     function func() {
-
-      db = document.getElementById('dob').value;
+      var db = new Date(document.getElementById('dob').value);
       createtable();
       createtable2();
-      var x = parseDate(db);
-      var age = calculate_age(x);
-      ages.push(age);
+      console.log(db);
+      var age = calculate_age(db);
       console.log(age);
+      ages.push(age);
+      createtable3();
       c += 1;
 
     }
     function calculate_age(dob) {
       var diff_ms = Date.now() - dob.getTime();
       var age_dt = new Date(diff_ms);
+      console.log(diff_ms);
+      console.log(age_dt);
       return Math.abs(age_dt.getUTCFullYear() - 1970);
     }
-    function parseDate(input) {
-      var parts = input.match(/(\d+)/g);
-      // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-      return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
-    }
+
     function createtable() {
       c += 1;
       if (c > 2) {
