@@ -73,7 +73,7 @@
     <input id="one" onclick="func()" type="submit" name="Submit" [disabled]="!ngForm.valid">
   </form>
 
-  <table id="go" border="1px" width="400px" height="40px">
+  <table id="go" border="1px" width="454px" height="40px">
     <tr height="40px">
       <th>First Name</th>
       <th>Last Name</th>
@@ -177,7 +177,8 @@
         val = fnames.length - 4;
       table = document.createElement("table");
       table.setAttribute("id", "T0");
-
+      var header = table.createTHead();
+      h = header.insertRow();
       row = table.insertRow();
       var a = row.insertCell();
       a.innerHTML = "<b>First Name</b>";
@@ -209,7 +210,7 @@
           btn.innerHTML = "Delete"
           cell.appendChild(btn);
           btn.setAttribute("id", id);
-          btn.onclick = function () { document.getElementById(table.rows[1].id).remove(); };
+          btn.onclick = function () { document.getElementById(table.rows[2].id).remove(); };
           console.log(id);
           row = table.insertRow();
           row.setAttribute("id", id);
