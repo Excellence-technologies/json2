@@ -48,17 +48,11 @@
 </head>
 
 <body>
-  <!-- <form>
-    <label for="fname"><b>Search</b></label>
 
-    <input  onkeyup="Filter()" id="search" type="search" placeholder="Search">
-  </form>
-  <br><br><br><br><br> -->
   <form style="float:right;width:auto; border:2px solid grey" onsubmit="return false">
     <input id="myInput" onkeyup="Filter()" type="text" placeholder="Search here ">
 
   </form>
-
   <form id="new_user" onsubmit="return false">
 
     <label for="fname">First Name</label>
@@ -72,8 +66,9 @@
 
     <input id="one" onclick="func()" type="submit" name="Submit" [disabled]="!ngForm.valid">
   </form>
+  <br><br><br><br><button onclick="sortTable()" type="button" style="width:100px; background-color:black; height:50px; border-color:black;border-radius:60px" name="button"><h3 style="color:white;"><b>Sort</b></h3></button><br><br>
 
-  <table id="go" border="1px" width="454px" height="40px">
+  <table id="T0" border="1px" width="454px" height="40px">
     <tr height="40px">
       <th>First Name</th>
       <th>Last Name</th>
@@ -103,6 +98,41 @@
 
     var fnames = ["Rishabh", "Jha", "1997-09-26", "22",
       "Example", "One", "1997-16-09", "22"];
+
+    function sortTable() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("T0");
+      switching = true;
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[0];
+          y = rows[i + 1].getElementsByTagName("TD")[0];
+          //check if the two rows should switch place:
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
+      }
+    }
 
 
     function Filter() {
@@ -165,7 +195,7 @@
     function createtable0() {
       c += 1;
       if (c == 1) {
-        document.getElementById("go").remove();
+        document.getElementById("T0").remove();
 
       }
       if (c > 2) {
