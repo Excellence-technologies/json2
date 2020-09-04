@@ -79,18 +79,21 @@
       <th>Last Name</th>
       <th>Date of Birth</th>
       <th>Age</th>
+      <th>Action</th>
     </tr>
-    <tr>
+    <tr id="1">
       <td>Rishabh</td>
       <td>Jha</td>
       <td>1997-09-26</td>
       <td>22</td>
+      <td> <button type="button" onclick="rem(1)" name="button">Delete</button> </td>
     </tr>
-    <tr>
+    <tr id="2">
       <td>Example</td>
       <td>One</td>
       <td>1997-16-09</td>
       <td>22</td>
+      <td> <button type="button" onclick="rem(2)" name="button">Delete</button> </td>
     </tr>
   </table>
   <div id="container"></div>
@@ -181,9 +184,13 @@
       row.insertCell().innerHTML = "<b>Last Name</b>";
       row.insertCell().innerHTML = "<b>Date of Birth</b>";
       row.insertCell().innerHTML = "<b>Age</b>"
+      row.insertCell().innerHTML = "<b>Action</b>"
 
 
       row = table.insertRow();
+      row.setAttribute("id", id);
+      id++;
+
 
       for (var i of fnames) {
 
@@ -195,15 +202,30 @@
 
 
         if (count % perrow == 0) {
+          cell = row.insertCell();
+          var btn = document.createElement('button');
+          btn.type = "button";
+          btn.value = "Delete";
+          btn.innerHTML = "Delete"
+          cell.appendChild(btn);
+          btn.setAttribute("id", id);
+          btn.onclick = function () { document.getElementById(table.rows[1].id).remove(); };
+          console.log(id);
           row = table.insertRow();
+          row.setAttribute("id", id);
+          id += 1;
 
         }
-        id += 1;
       }
 
       // Attach table to container
 
       document.getElementById("container").appendChild(table);
+    }
+    function rem(id) {
+      var myobj = document.getElementById(id);
+      console.log(id);
+      myobj.remove();
     }
 
 
